@@ -1,4 +1,4 @@
-**1. The supplementary analyses for activations of BART were performed using between-subject unbalanced trial number of each conditions(see `trial_numbers_BART.csv`).**
+**1. The supplementary analyses for activations of BART were aiming for statistically clarifing between-subject unbalanced trial number of conditions(see `trial_numbers_BART.csv`).**
 
 **2. The above supplementary analyses were based on robust regression taking unbalanced trial number of conditions as covariates.**
 
