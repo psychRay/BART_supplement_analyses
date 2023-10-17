@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Variables
-REMOTE_SERVER="172.16.212.144"
-REMOTE_USER="iCAN"
+REMOTE_SERVER="172.11xxx"
+REMOTE_USER="xxx"
 BASE_REMOTE_PATH="/brain/iCAN_admin/home/JiangMin/Results/First_Level/2016"
 LOCAL_PATH="E:/ImportantDOCs/currentWKdir/work_postdoc/BART_supplement"
 
 # Uncomment and fill in if using sshpass
-# PASSWORD="qinlab2016"
+# PASSWORD="xxxxxx"
 
 # Uncomment if using sshpass
 # SSHPASS_CMD="sshpass -p $PASSWORD"
