@@ -1,5 +1,5 @@
 
-%% 提取BART的trial数信息：
+%% extract number of trials of each condition
 folder_1st = 'E:\ImportantDOCs\currentWKdir\work_postdoc\BART_supplement\stats_1st-level';
 file_behv  = 'E:\ImportantDOCs\currentWKdir\work_postdoc\BART_supplement\BART_Behavior_Analyses_298.xlsx';
 behv_bart  = readtable(file_behv);
