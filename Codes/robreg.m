@@ -1,5 +1,6 @@
-%% Robust regression(trialÊı×÷Îªcovariates):
+%% Robust regression(trial number as covariates):
 
+% The below analyses based on canlabcore tools and robust toolbox
 path_canlabcore = 'D:\Canlab_codes\CanlabCore';
 path_robregtool = 'D:\Canlab_codes\RobustToolbox-master';
 addpath(genpath(path_canlabcore));
@@ -14,7 +15,7 @@ tab_cov = 'E:\ImportantDOCs\currentWKdir\work_postdoc\BART_supplement\trial_numb
 
 %%
     %% ====================================================================================================
-    % for£º³ÉÈËºÍ¶ùÍ¯ÔÚ¸÷Ìõ¼şÏÂµÄ¼¤»î
+    % forï¼šcondition-wise one-sample activation of audlts and children(æˆäººå’Œå„¿ç«¥åœ¨å„æ¡ä»¶ä¸‹çš„æ¿€æ´»)
     for n_cons=1:numel(cons)
 
         img_set  = dir([folder_fmrimg_1st_Chd '\' cons{1,n_cons} '\*nii']);
@@ -28,7 +29,7 @@ tab_cov = 'E:\ImportantDOCs\currentWKdir\work_postdoc\BART_supplement\trial_numb
     % ====================================================================================================
 
     % ====================================================================================================
-    % for£º³ÉÈËºÍ¶ùÍ¯ÔÚ¸÷Ìõ¼şÏÂµÄ±È½Ï
+    % forï¼šcondition-wise contrasts btw adults and children(æˆäººå’Œå„¿ç«¥åœ¨å„æ¡ä»¶ä¸‹çš„æ¯”è¾ƒ)
     for n_cons=1:numel(cons)
 
         img_set_A = dir([folder_fmrimg_1st_Adt '\' cons{1,n_cons} '\*nii']);
@@ -49,14 +50,15 @@ tab_cov = 'E:\ImportantDOCs\currentWKdir\work_postdoc\BART_supplement\trial_numb
 EXPT.subjects  = subject_names;
 
     % ====================================================================================================
-    % ´Ócovariates±í¸ñÖĞÌáÈ¡Óëµ±Ç°×é±»ÊÔÆ¥ÅäµÄcovariates
+    % extract covariates from table of covariates, matching the current subjects group(ä»covariatesè¡¨æ ¼ä¸­
+    % æå–ä¸å½“å‰ç»„è¢«è¯•åŒ¹é…çš„covariates)
     T = readtable(tab_cov);
     columnName = 'ID';
     elementsToFind = cellfun(@(x) x(1:end-9), subject_names, 'UniformOutput', false);
 
     indices_subs = cellfun(@(x) find(strcmp(T.(columnName), x)), elementsToFind, 'UniformOutput', false);
     indices_subs = cell2mat(indices_subs);
-    cov_mat = table2array(T(indices_subs, [2:4 6]));    % ĞèÒª¸ù¾İÊµ¼ÊÇé¿öÑ¡ÔñÌáÈ¡µÄcolumns    
+    cov_mat = table2array(T(indices_subs, [2:4 6]));    % éœ€è¦æ ¹æ®å®é™…æƒ…å†µé€‰æ‹©æå–çš„columns    
     % ====================================================================================================
 
 EXPT.SNPM.connums  = [1 2 3];
@@ -74,7 +76,7 @@ res_EXPT = robfit(EXPT);
 
 %%
     %% ====================================================================================================
-    % for£º¸÷ÄêÁä×é¶ùÍ¯ÔÚ¸÷Ìõ¼şÏÂµÄ¼¤»î
+    % forï¼šcondition-wise one-sample activation of each age group in children(å„å¹´é¾„ç»„å„¿ç«¥åœ¨å„æ¡ä»¶ä¸‹çš„æ¿€æ´»)
     age_groups = {'Age_6_7', 'Age_8', 'Age_9', 'Age_10', 'Age_11_12'};
     EXPT.SNPM.connums  = [1 2 3];
     EXPT.SNPM.connames = ['ift_Adt'; 'win_Adt'; 'los_Adt'];
@@ -98,13 +100,14 @@ res_EXPT = robfit(EXPT);
         EXPT.subjects  = subject_names;
         
         % ====================================================================================================
-        % ´Ócovariates±í¸ñÖĞÌáÈ¡Óëµ±Ç°×é±»ÊÔÆ¥ÅäµÄcovariates
+        % extract covariates from table of covariates, matching the current subjects group(ä»covariatesè¡¨æ ¼ä¸­
+        % æå–ä¸å½“å‰ç»„è¢«è¯•åŒ¹é…çš„covariates)
         columnName = 'ID';
         elementsToFind = cellfun(@(x) x(1:end-9), subject_names, 'UniformOutput', false);
 
         indices_subs = cellfun(@(x) find(strcmp(T.(columnName), x)), elementsToFind, 'UniformOutput', false);
         indices_subs = cell2mat(indices_subs);
-        cov_mat = table2array(T(indices_subs, 2:4));    % ĞèÒª¸ù¾İÊµ¼ÊÇé¿öÑ¡ÔñÌáÈ¡µÄcolumns    
+        cov_mat = table2array(T(indices_subs, 2:4));    % éœ€è¦æ ¹æ®å®é™…æƒ…å†µé€‰æ‹©æå–çš„columns    
         % ====================================================================================================
         
         EXPT.cov = cov_mat;
