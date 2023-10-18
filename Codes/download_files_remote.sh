@@ -33,8 +33,8 @@ for SUBJECT_ID in $SUBJECT_IDS; do
     # Using sshpass
     #$SSHPASS_CMD sftp -oBatchMode=no -b - $REMOTE_USER@$REMOTE_SERVER <<EOF
 	
-	# Without sshpass
-	sftp -oBatchMode=no -b - $REMOTE_USER@$REMOTE_SERVER <<EOF
+    # Without sshpass
+    sftp -oBatchMode=no -b - $REMOTE_USER@$REMOTE_SERVER <<EOF
 cd $REMOTE_PATH
 get -r * $LOCAL_PATH/$SUBJECT_ID/
 bye
