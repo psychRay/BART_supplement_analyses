@@ -1,3 +1,5 @@
+%% the below codes used for correction of multi-comparison and plot the stat-img on surf
+%% codes based on canlabcore tools and BrainNet view
 
 clc; close all; clear EC;
 %% Necessary variables
@@ -68,7 +70,9 @@ for n_subset=1:1  %numel(id_subsets)
            VolumeFile = fname;
            OutputFile = fullfile(folder_figs, [img_name(1,1:end-4), '.png']); 
            load(MapCfg); 
-           
+
+           % change configuration of plotting according to type of stat-img(two-sample OR
+           % one-sample statistic):
            vol = spm_read_vols(spm_vol(VolumeFile));
            if sum(unique(SETUP.X(:,1)))==0
               EC.vol.display = 1;
